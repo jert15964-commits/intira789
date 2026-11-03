@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>อินทิรา 789 - สไตล์และไอเดีย</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #ff8800;
+        }
+
+        * {
+            box-sizing: border-box;
+            font-family: 'Kanit', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #ffffff;
+            color: #000000;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Navbar */
+        .navbar {
+            background-color: #faf0a2;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+        }
+
+        .logo {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #555;
+            font-size: 18px;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a.active, 
+        .nav-links a:hover {
+            color: #F7931E;
+            text-decoration: underline;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            margin: 40px auto;
+            padding: 0 20px;
+            text-align: center;
+            flex: 1;
+        }
+
+        .page-title {
+            font-size: 36px;
+            font-weight: bold;
+            margin-bottom: 40px;
+        }
+
+        .status-text {
+            font-size: 18px;
+            color: #666666;
+            margin-top: 30px;
+            display: none; 
+        }
+
+        .error-text {
+            color: #d9534f;
+        }
+
+        /* Grid Design */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+
+        .card {
+            background-color: #ffdb27;
+            padding: 3px;
+            text-align: left;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            display: none; 
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .card.active {
+            display: block; 
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .card-image-wrapper {
+            background-color: #e6f7ff;
+            height: 180px;
+            width: 100%;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 6px;
+        }
+
+        .card-image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .card-info {
+            background-color: #ffffff;
+            padding: 12px;
+            margin-top: 10px;
+            min-height: 70px;
+            border-radius: 6px;
+        }
+
+        .card-info p {
+            font-size: 16px;
+            font-weight: bold;
+            margin: 4px 0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* Modal (Popup แสดงทั้ง 3 รูป) */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(3px);
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .modal-card {
+            background-color: #ffdb27;
+            padding: 7px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            width: 100%;
+            max-width: 1100px;
+            position: relative;
+            text-align: left;
+        }
+
+        .modal-body-content {
+            background-color: #ffffff;
+            border-radius: 12px;
+            padding: 20px;
+            position: relative;
+        }
+
+        .modal-images-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .modal-image-wrapper {
+            width: 100%;
+            height: 280px;
+            background-color: #e6f7ff;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .modal-image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .modal-info {
+            margin-top: 20px;
+            padding: 0 5px;
+        }
+
+        .modal-info p {
+            font-size: 20px;
+            font-weight: bold;
+            margin: 6px 0;
+            color: #000;
+        }
+
+        /* ปุ่มปิด Modal */
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            color: #000;
+            font-size: 32px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 10;
+            line-height: 1;
+        }
+
+        .close-btn:hover {
+            color: #666;
+        }
+
+        /* Footer */
+        .custom-footer {
+            background-color: #16181b;
+            color: #ffffff;
+            padding: 50px 0;
+            margin-top: 60px;
+            width: 100%;
+        }
+
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+
+        .footer-col {
+            flex: 1;
+            min-width: 240px;
+        }
+
+        .footer-logo {
+            color: var(--primary-color);
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .footer-contact-list p {
+            color: #cccccc;
+            font-size: 16px;
+            line-height: 1.8;
+            margin-bottom: 6px;
+        }
+
+        .footer-contact-list strong {
+            color: #ffffff;
+            font-weight: 500;
+        }
+
+        .footer-desc {
+            color: #cccccc;
+            font-size: 15px;
+            line-height: 1.7;
+        }
+
+        .footer-title {
+            color: #ffffff;
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 18px;
+        }
+
+        .footer-menu {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-menu li {
+            margin-bottom: 10px;
+        }
+
+        .footer-menu a {
+            color: #e67e22;
+            text-decoration: none;
+            font-size: 16px;
+            transition: color 0.2s ease;
+        }
+
+        .footer-menu a:hover {
+            color: #ff9f43;
+            text-decoration: underline;
+        }
+
+        .admin-btn {
+            display: inline-block;
+            background-color: #2c3e50;
+            color: #ffffff;
+            padding: 10px 24px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            margin-top: 12px;
+            border: 1px solid #455a64;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .admin-btn:hover {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            color: #ffffff;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .grid-container { grid-template-columns: repeat(2, 1fr); }
+            .modal-image-wrapper { height: 200px; }
+        }
+
+        @media (max-width: 600px) {
+            .navbar { flex-direction: column; gap: 15px; padding: 15px; }
+            .grid-container { grid-template-columns: 1fr; }
+            .modal-images-grid { grid-template-columns: 1fr; }
+            .modal-image-wrapper { height: 220px; }
+            .modal-card { padding: 15px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header / Navbar -->
+    <header class="navbar">
+        <div class="logo">อินทิรา 789</div>
+        <nav class="nav-links">
+            <a href="index.html">หน้าแรก</a>
+            <a href="about.html">เกี่ยวกับเรา</a>
+            <a href="idea.html" class="active">สไตล์และไอเดีย</a>
+            <a href="example.html">ตัวอย่างงาน</a>
+            <a href="contact.html">ติดต่อ</a>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        <h1 class="page-title">สไตล์และไอเดีย</h1>
+        
+        <!-- ข้อความแจ้งสถานะโหลดข้อมูล -->
+        <div id="statusMessage" class="status-text">กำลังโหลดข้อมูล...</div>
+        
+        <div class="grid-container" id="ideaGrid">
+            <!-- Template Card (ต้นแบบการ์ดซ่อนไว้) -->
+            <div class="card" id="cardTemplate">
+                <div class="card-image-wrapper">
+                    <img src="" alt="Idea Image" class="idea-image" onerror="this.onerror=null; this.src='https://via.placeholder.com/300x200?text=Image+Not+Found';">
+                </div>
+                <div class="card-info">
+                    <p class="idea-name">ชื่อ: </p>
+                    <p class="idea-type">ประเภท: </p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal สำหรับแสดงข้อมูล 3 รูปของแถวนั้น -->
+    <div id="cardModal" class="modal">
+        <div class="modal-card">
+            <div class="modal-body-content">
+                <span class="close-btn" onclick="closeModal()">&times;</span>
+                <div class="modal-images-grid">
+                    <div class="modal-image-wrapper">
+                        <img id="modalImg1" src="" alt="รูปที่ 1" onerror="this.onerror=null; this.src='https://via.placeholder.com/300x200?text=Image+1+Not+Found';">
+                    </div>
+                    <div class="modal-image-wrapper">
+                        <img id="modalImg2" src="" alt="รูปที่ 2" onerror="this.onerror=null; this.src='https://via.placeholder.com/300x200?text=Image+2+Not+Found';">
+                    </div>
+                    <div class="modal-image-wrapper">
+                        <img id="modalImg3" src="" alt="รูปที่ 3" onerror="this.onerror=null; this.src='https://via.placeholder.com/300x200?text=Image+3+Not+Found';">
+                    </div>
+                </div>
+                <div class="modal-info">
+                    <p id="modalNameText">ชื่อ: </p>
+                    <p id="modalTypeText">ประเภท: </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer ด้านล่างสุด -->
+    <footer class="custom-footer">
+        <div class="footer-container">
+            <!-- คอลัมน์ที่ 1: โลโก้ และข้อมูลจากตาราง contact (tell, email, fecebook) -->
+            <div class="footer-col">
+                <div class="footer-logo">อินทิรา 789</div>
+                <div class="footer-contact-list">
+                    <p><strong>tell :</strong> <span id="footerTell">-</span></p>
+                    <p><strong>email :</strong> <span id="footerEmail">-</span></p>
+                    <p><strong>fecebook :</strong> <span id="footerFacebook">-</span></p>
+                </div>
+            </div>
+
+            <!-- คอลัมน์ที่ 2: เมนูเรียงลงล่าง -->
+            <div class="footer-col">
+                <h3 class="footer-title">เมนู</h3>
+                <ul class="footer-menu">
+                    <li><a href="index.html">หน้าแรก</a></li>
+                    <li><a href="about.html">เกี่ยวกับเรา</a></li>
+                    <li><a href="idea.html">สไตล์และไอเดีย</a></li>
+                    <li><a href="example.html">ตัวอย่างงาน</a></li>
+                    <li><a href="contact.html">ติดต่อ</a></li>
+                </ul>
+            </div>
+
+            <!-- คอลัมน์ที่ 3: ปุ่มสำหรับ Admin ทางขวา -->
+            <div class="footer-col">
+                <h3 class="footer-title">สำหรับผู้ดูแลระบบ</h3>
+                <p class="footer-desc">จัดการข้อมูลเว็บไซต์และระบบหลังบ้าน</p>
+                <a href="admin-login.html" class="admin-btn">สำหรับ Admin</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        let allIdeaData = [];
+
+        function convertDriveUrl(url) {
+            if (!url) return 'https://via.placeholder.com/300x200?text=No+Image';
+            
+            const match = url.match(/\/d\/([a-zA-Z0-9_-]+)/) || url.match(/id=([a-zA-Z0-9_-]+)/);
+            
+            if (match && match[1]) {
+                return `https://drive.google.com/thumbnail?id=${match[1]}&sz=w1000`;
+            }
+            return url;
+        }
+
+        async function fetchIdeaData() {
+            const statusMessage = document.getElementById('statusMessage');
+            const gridContainer = document.getElementById('ideaGrid');
+            const cardTemplate = document.getElementById('cardTemplate');
+
+            statusMessage.style.display = 'block';
+            statusMessage.innerText = 'กำลังโหลดข้อมูล...';
+            statusMessage.classList.remove('error-text');
+
+            try {
+                const response = await fetch('http://localhost:3000/api/ideaint/all'); 
+                const result = await response.json();
+
+                if (result.success && result.data && result.data.length > 0) {
+                    statusMessage.style.display = 'none';
+                    allIdeaData = result.data;
+
+                    gridContainer.querySelectorAll('.card:not(#cardTemplate)').forEach(el => el.remove());
+
+                    allIdeaData.forEach((item, index) => {
+                        const newCard = cardTemplate.cloneNode(true);
+                        newCard.removeAttribute('id'); 
+                        newCard.classList.add('active'); 
+
+                        const imgElement = newCard.querySelector('.idea-image');
+                        imgElement.src = convertDriveUrl(item.image1_ii);
+                        imgElement.alt = item.name_ii || 'Idea Image';
+
+                        const nameElement = newCard.querySelector('.idea-name');
+                        nameElement.textContent = `ชื่อ: ${item.name_ii || '-'}`;
+
+                        const typeElement = newCard.querySelector('.idea-type');
+                        typeElement.textContent = `ประเภท: ${item.type_ii || '-'}`;
+
+                        newCard.onclick = function() {
+                            openModal(index);
+                        };
+
+                        gridContainer.appendChild(newCard);
+                    });
+                } else {
+                    statusMessage.style.display = 'block';
+                    statusMessage.innerText = 'ไม่พบข้อมูลไอเดียในระบบ';
+                }
+            } catch (error) {
+                console.error('Error fetching data:', error);
+                statusMessage.style.display = 'block';
+                statusMessage.innerText = 'ไม่สามารถเชื่อมต่อกับเซิร์ฟเวอร์ได้ กรุณาลองใหม่อีกครั้ง';
+                statusMessage.classList.add('error-text');
+            }
+        }
+
+        async function fetchFooterContact() {
+            try {
+                const response = await fetch('http://localhost:3000/api/contact/all');
+                const result = await response.json();
+
+                let contactData = null;
+                if (result.success && result.data) {
+                    contactData = Array.isArray(result.data) 
+                        ? result.data[result.data.length - 1] 
+                        : result.data;
+                } else if (Array.isArray(result) && result.length > 0) {
+                    contactData = result[result.length - 1];
+                }
+
+                if (contactData) {
+                    const rawTell = contactData.tell;
+                    const formattedTell = (rawTell !== null && rawTell !== undefined && rawTell !== '')
+                        ? String(rawTell).padStart(10, '0')
+                        : '-';
+
+                    document.getElementById('footerTell').textContent = formattedTell;
+                    document.getElementById('footerEmail').textContent = contactData.email || '-';
+                    document.getElementById('footerFacebook').textContent = contactData.fecebook || contactData.facebook || '-';
+                }
+            } catch (error) {
+                console.error('Error fetching footer contact data:', error);
+            }
+        }
+
+        const modal = document.getElementById('cardModal');
+        const modalImg1 = document.getElementById('modalImg1');
+        const modalImg2 = document.getElementById('modalImg2');
+        const modalImg3 = document.getElementById('modalImg3');
+        const modalName = document.getElementById('modalNameText');
+        const modalType = document.getElementById('modalTypeText');
+
+        function openModal(index) {
+            const data = allIdeaData[index];
+            if (!data) return;
+
+            modalImg1.src = convertDriveUrl(data.image1_ii);
+            modalImg2.src = convertDriveUrl(data.image2_ii);
+            modalImg3.src = convertDriveUrl(data.image3_ii);
+
+            modalName.textContent = `ชื่อ: ${data.name_ii || '-'}`;
+            modalType.textContent = `ประเภท: ${data.type_ii || '-'}`;
+
+            modal.style.display = 'flex';
+        }
+
+        function closeModal() {
+            modal.style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            fetchIdeaData();
+            fetchFooterContact();
+        });
+    </script>
+</body>
+</html>

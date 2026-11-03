@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>อินทิรา 789 - ติดต่อเรา</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Kanit', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #ffffff;
+            color: #000000;
+        }
+
+        /* Navbar */
+         .navbar {
+            background-color: #faf0a2;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+        }
+
+        .logo {
+            font-size: 32px;
+            font-weight: 700;
+            color: #ff8800;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #555;
+            font-size: 18px;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a.active,
+        .nav-links a:hover {
+            color: #F7931E;
+            text-decoration: underline;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 50px;
+        }
+
+        /* Loading Status */
+        .status-container {
+            text-align: center;
+            margin-top: 50px;
+        }
+        
+        .status-text {
+            font-size: 18px;
+            color: #666666;
+        }
+
+        .error-text {
+            color: #d9534f;
+            font-weight: 500;
+        }
+
+        /* Layout ซ้าย-ขวา */
+        .contact-content {
+            display: none;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-top: 20px;
+        }
+
+        /* ฝั่งซ้าย: ข้อมูลติดต่อ */
+        .contact-info {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .contact-info h2 {
+            font-size: 32px;
+            margin-bottom: 30px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 120px 1fr;
+            gap: 20px 15px;
+            font-size: 20px;
+            align-items: start;
+        }
+
+        .info-grid .label {
+            font-weight: bold;
+            text-align: right;
+        }
+
+        .info-grid .value {
+            font-weight: bold;
+            word-break: break-word;
+        }
+
+        /* ฝั่งขวา: QR Code */
+        .qr-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 300px;
+        }
+
+        .qr-section h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        .qr-code-box {
+            width: 350px;
+            height: 350px;
+            border: 8px solid #ff914d;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #ffffff;
+            color: #000;
+            font-size: 16px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .qr-code-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: none;
+        }
+
+        .footer-col {
+            background-color: #16181b;
+            flex: 1;
+            min-width: 240px;
+            text-align: center;
+        }
+         .footer-desc {
+            color: #cccccc;
+            font-size: 15px;
+            line-height: 1.7;
+        }
+
+        .footer-title {
+            color: #ffffff;
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 18px;
+        }
+    
+        .admin-btn {
+            display: inline-block;
+            background-color: #2c3e50;
+            color: #ffffff;
+            padding: 10px 24px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            margin-top: 12px;
+            border: 1px solid #455a64;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .admin-btn:hover {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            color: #ffffff;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .navbar { flex-direction: column; gap: 15px; padding: 15px; }
+            .container { padding: 0 20px; }
+            .info-grid { grid-template-columns: 100px 1fr; font-size: 18px; }
+            .qr-code-box { width: 280px; height: 280px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header / Navbar -->
+    <header class="navbar">
+        <div class="logo">อินทิรา 789</div>
+        <nav class="nav-links">
+            <a href="index.html">หน้าแรก</a>
+            <a href="about.html">เกี่ยวกับเรา</a>
+            <a href="idea.html">สไตล์และไอเดีย</a>
+            <a href="example.html">ตัวอย่างงาน</a>
+            <a href="contact.html" class="active">ติดต่อ</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <!-- Loading State -->
+        <div id="statusContainer" class="status-container">
+            <div id="statusMessage" class="status-text">กำลังโหลดข้อมูล...</div>
+        </div>
+            
+        <!-- Contact Content -->
+        <div id="contactContent" class="contact-content">
+            
+            <!-- ฝั่งซ้าย: ข้อมูลติดต่อ -->
+            <div class="contact-info">
+                <h2>ช่องทางติดต่อ</h2>
+                <div class="info-grid">
+                    <div class="label">tell:</div>
+                    <div class="value" id="val-tell">-</div>
+
+                    <div class="label">email:</div>
+                    <div class="value" id="val-email">-</div>
+
+                    <div class="label">fecebook:</div>
+                    <div class="value" id="val-fecebook">-</div>
+
+                    <div class="label">id line :</div>
+                    <div class="value" id="val-line">-</div>
+
+                    <div class="label">ที่อยู่:</div>
+                    <div class="value" id="val-address">-</div>
+                </div>
+            </div>
+
+            <!-- ฝั่งขวา: QR Code -->
+            <div class="qr-section">
+                <h2>QR code line</h2>
+                <div class="qr-code-box">
+                    <span id="qr-placeholder">qr code line</span>
+                    <img id="qr-image" src="" alt="QR Code">
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+        <div class="footer-col">
+                <h3 class="footer-title">สำหรับผู้ดูแลระบบ</h3>
+                <p class="footer-desc">จัดการข้อมูลเว็บไซต์และระบบหลังบ้าน</p>
+                <a href="admin-login.html" class="admin-btn">สำหรับ Admin</a>
+            </div>
+
+    <!-- JavaScript สำหรับดึงข้อมูลจาก Database -->
+    <script>
+    function convertDriveUrl(url) {
+        if (!url) return '';
+        const match = url.match(/(?:file\/d\/|open\?id=|id=|uc\?id=|d\/)([a-zA-Z0-9_-]{25,})/);
+        let fileId = null;
+
+        if (match && match[1]) {
+            fileId = match[1];
+        } else if (/^[a-zA-Z0-9_-]{25,}$/.test(url)) {
+            fileId = url;
+        }
+
+        if (fileId) {
+            return `https://lh3.googleusercontent.com/d/${fileId}`;
+        }
+        return url;
+    }
+
+    function formatPhoneNumber(tell) {
+        if (tell === null || tell === undefined || tell === '') return '-';
+        let strTell = String(tell).trim();
+        if (/^\d+$/.test(strTell) && strTell.length < 10) {
+            strTell = strTell.padStart(10, '0');
+        }
+        return strTell;
+    }
+
+    async function fetchContactData() {
+        const statusContainer = document.getElementById('statusContainer');
+        const statusMessage = document.getElementById('statusMessage');
+        const contactContent = document.getElementById('contactContent');
+
+        if (statusMessage) {
+            statusMessage.style.display = 'block';
+            statusMessage.innerText = 'กำลังโหลดข้อมูล...';
+            statusMessage.classList.remove('error-text');
+        }
+
+        try {
+            const apiUrl = 'http://localhost:3000/api/contact/all'; 
+            const response = await fetch(apiUrl);
+            
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            
+            const result = await response.json();
+
+            let contactData = null;
+            if (result.success && result.data) {
+                contactData = Array.isArray(result.data) 
+                    ? result.data[result.data.length - 1] // ดึงแถวล่าสุด
+                    : result.data;
+            } else if (Array.isArray(result) && result.length > 0) {
+                contactData = result[result.length - 1];
+            } else if (typeof result === 'object' && result !== null) {
+                contactData = result;
+            }
+
+            if (contactData) {
+                if (statusContainer) statusContainer.style.display = 'none';
+                if (contactContent) contactContent.style.display = 'flex';
+
+                // อ้างอิง ID ให้ตรงกับ HTML ด้านบน (val-tell, val-email, val-fecebook, val-line, val-address)
+                document.getElementById('val-tell').textContent = formatPhoneNumber(contactData.tell || contactData.tel);
+                document.getElementById('val-email').textContent = contactData.email || '-';
+                document.getElementById('val-fecebook').textContent = contactData.fecebook || contactData.facebook || '-';
+                document.getElementById('val-line').textContent = contactData.line || '-';
+                document.getElementById('val-address').textContent = contactData.address || '-';
+
+                const qrImg = document.getElementById('qr-image');
+                const qrPlaceholder = document.getElementById('qr-placeholder');
+                const imageLine = contactData.image_line || contactData.image;
+
+                if (imageLine && imageLine.trim() !== '' && qrImg) {
+                    qrImg.src = convertDriveUrl(imageLine);
+                    qrImg.style.display = 'block';
+                    if (qrPlaceholder) qrPlaceholder.style.display = 'none';
+                }
+            } else {
+                if (statusMessage) {
+                    statusMessage.style.display = 'block';
+                    statusMessage.innerText = 'ไม่พบข้อมูลการติดต่อในระบบ';
+                }
+            }
+        } catch (error) {
+            console.error('Error fetching contact data:', error);
+            if (statusMessage) {
+                statusMessage.style.display = 'block';
+                statusMessage.innerText = 'ไม่สามารถดึงข้อมูลการติดต่อได้ กรุณาตรวจสอบการเชื่อมต่อเซิร์ฟเวอร์ หรือสถานะ API';
+                statusMessage.classList.add('error-text');
+            }
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', fetchContactData);
+    </script>
+</body>
+</html>

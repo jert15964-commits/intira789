@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>แก้ไขหน้าเกี่ยวกับเรา - อินทิรา 789 กรุ๊ป</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ... (โค้ด CSS ของคุณคงเดิม) ... */
+        * {
+            box-sizing: border-box;
+            font-family: 'Kanit', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #ffffff;
+            color: #000000;
+        }
+
+        /* Navbar */
+        .navbar {
+            background-color: #ffffff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+        }
+
+        .logo {
+            font-size: 32px;
+            font-weight: 700;
+            color: #ff8800;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #555;
+            font-size: 18px;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a.active,
+        .nav-links a:hover {
+            color: #F7931E;
+            text-decoration: underline;
+        }
+
+
+        /* ช่องใส่ข้อความใหญ่ */
+        .text-input-box {
+            width: 100%;
+            min-height: 160px;
+            border-radius: 8px;
+            padding: 20px;
+            font-size: 20px;
+            background-color: #fffdd0;
+            margin-bottom: 20px;
+            resize: vertical;
+            outline: none;
+        }
+
+        /* ช่องกรอกข้อมูลเล็ก */
+        .input-field {
+            width: 380px;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            text-align: center;
+            background-color: #fffdd0;
+            outline: none;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        /* กล่องแสดงรูปภาพ */
+        .image-preview-box {
+            width: 200px;
+            height: 200px;
+            background-color: #fffdd0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+            font-weight: bold;
+            color: #000;
+            overflow: hidden;
+            margin-bottom: 25px;
+            text-align: center;
+            padding: 10px;
+            border-radius: 4px;
+        }
+
+        .image-preview-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* ปุ่มสีส้ม */
+        .btn-orange {
+            background-color: #ff944d;
+            color: #000;
+            font-size: 20px;
+            font-weight: bold;
+            border: none;
+            border-radius: 30px;
+            padding: 10px 70px;
+            cursor: pointer;
+            display: block;
+            margin: 0 auto;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .btn-orange:hover {
+            background-color: #ff8033;
+        }
+
+        /* ส่วนแสดงรายการ */
+        .gallery-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 35px;
+            justify-content: flex-start;
+            margin-top: 30px;
+        }
+
+        .gallery-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .gallery-img-box {
+            width: 200px;
+            height: 200px;
+            background-color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 22px;
+            font-weight: bold;
+            color: #000;
+            border: 2px solid #dcdade;
+            overflow: hidden;
+            text-align: center;
+            padding: 10px;
+        }
+
+        .gallery-img-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .btn-delete {
+            background-color: #ff944d;
+            color: #000;
+            font-size: 18px;
+            font-weight: bold;
+            border: none;
+            border-radius: 25px;
+            padding: 8px 45px;
+            cursor: pointer;
+        }
+
+        .btn-delete:hover {
+            background-color: #e60000;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="navbar">
+        <h1 class="logo">แก้ไขหน้าเกี่ยวกับเรา</h1>
+        <div class="nav-links">
+            <a href="edit-main.html">หน้าหลัก</a>
+            <a href="edit-about_us.html" class="active">เกี่ยวกับเรา</a>
+            <a href="edit-ideainterior.html">ไอเดีย</a>
+            <a href="edit-example.html">ตัวอย่าง</a>
+            <a href="edit-contact.html">ติดต่อ</a>
+            <a href="../fontend/index.html">กลับสู่หน้าหลัก</a>
+        </div>
+    </div>
+
+    <div class="main-box">
+        <form id="aboutForm">
+            <!-- ช่องกรอกข้อความ (text_A) -->
+            <textarea id="textContent" class="text-input-box" placeholder="ใส่ข้อความ"></textarea>
+
+            <!-- ช่องกรอกรหัสรูป (id_imageA) -->
+            <div>
+                <input type="text" id="imageId" class="input-field" placeholder="รหัสรูป" required>
+            </div>
+
+            <!-- ช่องกรอกลิงก์รูปภาพ (image_A) -->
+            <div>
+                <input type="text" id="imageLink" class="input-field" placeholder="ลิงก์รูป" oninput="previewImage()">
+            </div>
+
+            <!-- กล่องพรีวิวรูปภาพ -->
+            <div class="image-preview-box" id="previewBox">
+                รูปภาพ
+            </div>
+
+            <!-- ปุ่ม ตกลง -->
+            <button type="submit" class="btn-orange">ตกลง</button>
+        </form>
+
+        <div class="gallery-container" id="galleryContainer"></div>
+    </div>
+
+    <script>
+        // เปลี่ยน URL ให้ชี้ไปยัง API เกี่ยวกับเรา
+        const API_URL = 'http://localhost:3000/api/about';
+
+        document.addEventListener('DOMContentLoaded', loadData);
+
+        function convertDriveUrl(url) {
+            if (!url) return '';
+            const match = url.match(/\/d\/([a-zA-Z0-9_-]+)|id=([a-zA-Z0-9_-]+)/);
+            if (match) {
+                const fileId = match[1] || match[2];
+                return `https://lh3.googleusercontent.com/d/${fileId}`;
+            }
+            return url;
+        }
+
+        function previewImage() {
+            const rawUrl = document.getElementById('imageLink').value.trim();
+            const previewBox = document.getElementById('previewBox');
+
+            if (rawUrl) {
+                const imageUrl = convertDriveUrl(rawUrl);
+                previewBox.innerHTML = `<img src="${imageUrl}" onerror="this.onerror=null; this.parentElement.innerText='ไม่พบรูปภาพ หรือไม่ได้เปิดสิทธิ์สาธารณะ';">`;
+            } else {
+                previewBox.innerHTML = 'รูปภาพ';
+            }
+        }
+
+        // ดึงข้อมูลรูปภาพของตาราง about_us มาแสดง
+        async function loadData() {
+            try {
+                const res = await fetch(`${API_URL}/all`);
+                const result = await res.json();
+
+                if (result.success) {
+                    const gallery = document.getElementById('galleryContainer');
+                    gallery.innerHTML = '';
+
+                    result.data.forEach(item => {
+                        const card = document.createElement('div');
+                        card.className = 'gallery-card';
+                        
+                        // ใช้ฟิลด์ image_A
+                        const displayUrl = convertDriveUrl(item.image_A);
+                        const imageHTML = displayUrl 
+                            ? `<img src="${displayUrl}" onerror="this.onerror=null; this.parentElement.innerText='รูปภาพไม่ถูกต้อง';">`
+                            : 'รูปภาพ';
+
+                        // ใช้ฟิลด์ id_imageA ในการสั่งลบ
+                        card.innerHTML = `
+                            <div class="gallery-img-box">
+                                ${imageHTML}
+                            </div>
+                            <button class="btn-delete" onclick="deleteItem('${item.id_imageA}')">ลบ</button>
+                        `;
+                        gallery.appendChild(card);
+                    });
+                }
+            } catch (error) {
+                console.error('Error loading data:', error);
+            }
+        }
+
+        // เพิ่มข้อมูลลงตาราง about_us
+        document.getElementById('aboutForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const id_imageA = document.getElementById('imageId').value.trim();
+            const text_A = document.getElementById('textContent').value;
+            const rawImage = document.getElementById('imageLink').value;
+            const image_A = convertDriveUrl(rawImage);
+
+            try {
+                const res = await fetch(`${API_URL}/add`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ id_imageA, text_A, image_A })
+                });
+
+                const result = await res.json();
+                if (result.success) {
+                    alert('บันทึกข้อมูลเรียบร้อยแล้ว');
+                    document.getElementById('imageId').value = '';
+                    document.getElementById('textContent').value = '';
+                    document.getElementById('imageLink').value = '';
+                    previewImage();
+                    loadData();
+                } else {
+                    alert('เกิดข้อผิดพลาด: ' + result.message);
+                }
+            } catch (error) {
+                console.error('Error adding data:', error);
+            }
+        });
+
+        // ลบข้อมูลโดยใช้ id_imageA
+        async function deleteItem(id_imageA) {
+            if (!confirm(`คุณต้องการลบรูปภาพรหัส ${id_imageA} ใช่หรือไม่?`)) return;
+
+            try {
+                const res = await fetch(`${API_URL}/delete/${id_imageA}`, {
+                    method: 'DELETE'
+                });
+
+                const result = await res.json();
+                if (result.success) {
+                    alert('ลบข้อมูลสำเร็จ');
+                    loadData();
+                } else {
+                    alert('ไม่สามารถลบได้: ' + result.message);
+                }
+            } catch (error) {
+                console.error('Error deleting data:', error);
+            }
+        }
+    </script>
+</body>
+</html>

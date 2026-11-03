@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>แก้ไขช่องทางติดต่อ - อินทิรา 789 กรุ๊ป</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ... (โค้ด CSS ของคุณคงเดิม) ... */
+        * {
+            box-sizing: border-box;
+            font-family: 'Kanit', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #ffffff;
+            color: #000000;
+        }
+
+        /* Navbar */
+        .navbar {
+            background-color: #ffffff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+        }
+
+        .logo {
+            font-size: 32px;
+            font-weight: 700;
+            color: #ff8800;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #555;
+            font-size: 18px;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a.active,
+        .nav-links a:hover {
+            color: #F7931E;
+            text-decoration: underline;
+        }
+
+
+        .form-container {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .form-label {
+            width: 180px;
+            font-size: 28px;
+            font-weight: bold;
+            text-align: right;
+            padding-right: 30px;
+            line-height: 45px;
+        }
+
+        .form-input-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .form-input {
+            width: 100%;
+            background-color: #FFFDE7;
+            border: none;
+            padding: 12px 20px;
+            font-size: 16px;
+            border-radius: 4px;
+            outline: none;
+            text-align: center;
+        }
+
+        .form-input::placeholder {
+            color: #555;
+        }
+
+        .preview-box {
+            width: 130px;
+            height: 130px;
+            background-color: #FFFDE7;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            color: #333;
+            font-size: 16px;
+        }
+
+        .preview-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: none;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .btn-submit {
+            background-color: #FF8E47;
+            color: #000;
+            border: none;
+            padding: 12px 60px;
+            font-size: 20px;
+            font-weight: bold;
+            border-radius: 25px;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: background-color 0.2s;
+        }
+
+        .btn-submit:hover {
+            background-color: #ff7d26;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="navbar">
+        <div class="logo">แก้ไขช่องทางติดต่อ</div>
+        <div class="nav-links">
+            <a href="edit-main.html">หน้าหลัก</a>
+            <a href="edit-about_us.html">เกี่ยวกับเรา</a>
+            <a href="edit-ideainterior.html">ไอเดีย</a>
+            <a href="edit-example.html">ตัวอย่าง</a>
+            <a href="edit-contact.html" class="active">ติดต่อ</a>
+            <a href="../fontend/index.html">กลับสู่หน้าหลัก</a>
+        </div>
+    </div>
+
+    <form id="contactForm" onsubmit="saveContact(event)">
+        <div class="form-container">
+            
+            <div class="form-group">
+                <label class="form-label" for="tell">tell</label>
+                <div class="form-input-container">
+                    <input type="text" id="tell" class="form-input" placeholder="เบอร์โทร" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="email">email</label>
+                <div class="form-input-container">
+                    <input type="email" id="email" class="form-input" placeholder="email">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="fecebook">fecebook</label>
+                <div class="form-input-container">
+                    <input type="text" id="fecebook" class="form-input" placeholder="fecebook">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="line">line</label>
+                <div class="form-input-container">
+                    <input type="text" id="line" class="form-input" placeholder="line">
+                    
+                    <!-- ช่องรับ URL สำหรับคอลัมน์ image_line -->
+                    <input type="text" id="image_line" class="form-input" placeholder="qrline" oninput="updatePreview()">
+                    
+                    <div class="preview-box">
+                        <span id="previewText">รูปภาพ</span>
+                        <img id="previewImage" alt="ตัวอย่าง QR Line">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="address">address</label>
+                <div class="form-input-container">
+                    <input type="text" id="address" class="form-input" placeholder="ที่อยู่">
+                </div>
+            </div>
+
+            <div class="button-container">
+                <button type="submit" class="btn-submit">ตกลง</button>
+            </div>
+
+        </div>
+    </form>
+
+    <script>
+        const API_URL = 'http://localhost:3000/api/contact';
+
+        // แปลงลิงก์ Google Drive ให้แสดงเป็นรูปภาพ Direct Link
+        function convertDriveUrl(url) {
+            if (!url) return '';
+            if (!url.includes('drive.google.com')) return url;
+
+            const match = url.match(/\/d\/([a-zA-Z0-9_-]+)/) || url.match(/id=([a-zA-Z0-9_-]+)/);
+            if (match && match[1]) {
+                return `https://drive.google.com/thumbnail?id=${match[1]}&sz=w1000`;
+            }
+            return url;
+        }
+
+        // แสดงตัวอย่างรูปภาพ Live Preview
+        function updatePreview() {
+            const rawUrl = document.getElementById('image_line').value.trim();
+            const directUrl = convertDriveUrl(rawUrl);
+            const imgElement = document.getElementById('previewImage');
+            const textElement = document.getElementById('previewText');
+
+            if (directUrl) {
+                imgElement.src = directUrl;
+                imgElement.style.display = 'block';
+                textElement.style.display = 'none';
+            } else {
+                imgElement.src = '';
+                imgElement.style.display = 'none';
+                textElement.style.display = 'inline';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', loadContactData);
+
+        // ดึงข้อมูลจาก DB มาใส่ช่องกรอกข้อมูล
+        async function loadContactData() {
+            try {
+                const response = await fetch(`${API_URL}/get`);
+                const result = await response.json();
+
+                if (result.success && result.data) {
+                    document.getElementById('tell').value = result.data.tell || '';
+                    document.getElementById('email').value = result.data.email || '';
+                    document.getElementById('fecebook').value = result.data.fecebook || '';
+                    document.getElementById('line').value = result.data.line || '';
+                    document.getElementById('image_line').value = result.data.image_line || ''; // โหลดค่าคอลัมน์ image_line
+                    document.getElementById('address').value = result.data.address || '';
+
+                    updatePreview();
+                }
+            } catch (error) {
+                console.error('ไม่สามารถโหลดข้อมูลได้:', error);
+            }
+        }
+
+        // บันทึกข้อมูลลง DB
+        async function saveContact(event) {
+            event.preventDefault();
+
+            const rawImageUrl = document.getElementById('image_line').value.trim();
+            const convertedImageUrl = convertDriveUrl(rawImageUrl);
+
+            const contactData = {
+                tell: document.getElementById('tell').value,
+                email: document.getElementById('email').value,
+                fecebook: document.getElementById('fecebook').value,
+                line: document.getElementById('line').value,
+                image_line: convertedImageUrl, // ส่งลิงก์เข้าคอลัมน์ image_line
+                address: document.getElementById('address').value
+            };
+
+            try {
+                const response = await fetch(`${API_URL}/save`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(contactData)
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    alert('บันทึกข้อมูลเรียบร้อยแล้ว!');
+                    loadContactData();
+                } else {
+                    alert('เกิดข้อผิดพลาด: ' + result.message);
+                }
+            } catch (error) {
+                console.error('เกิดข้อผิดพลาดในการบันทึกข้อมูล:', error);
+                alert('ไม่สามารถเชื่อมต่อกับเซิร์ฟเวอร์ได้');
+            }
+        }
+    </script>
+</body>
+</html>

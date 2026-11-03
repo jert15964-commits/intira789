@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>อินทิรา 789 - เกี่ยวกับเรา</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #ff8800;
+        }
+
+        * {
+            box-sizing: border-box;
+            font-family: 'Kanit', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #f9f9f9;
+            color: #333333;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* ---------------- Navbar ---------------- */
+        .navbar {
+            background-color: #faf0a2;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .logo {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #555;
+            font-size: 18px;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a.active, 
+        .nav-links a:hover {
+            color: #F7931E;
+            text-decoration: underline;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1000px;
+            width: 100%;
+            margin: 40px auto;
+            padding: 0 20px;
+            text-align: center;
+            flex: 1;
+        }
+
+        .page-title {
+            font-size: 36px;
+            font-weight: bold;
+            margin-bottom: 40px;
+        }
+
+        /* Text Content */
+        .about-text {
+            font-size: 20px;
+            line-height: 1.8;
+            color: #333333;
+            white-space: pre-line;
+            max-width: 800px;
+            margin: 0 auto 40px auto;
+            text-align: center;
+            padding: 0 15px;
+        }
+
+        /* Image Container */
+        .image-container {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            border-radius: 8px;
+            overflow: hidden;
+            display: none;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            background-color: #f9f9f9;
+        }
+
+        .image-container img {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+            display: block;
+        }
+
+        .status-text {
+            font-size: 18px;
+            color: #666666;
+            margin-top: 50px;
+        }
+        
+        .error-text {
+            color: #d9534f;
+        }
+
+        /* ---------------- Footer ---------------- */
+        .custom-footer {
+            background-color: #16181b;
+            color: #ffffff;
+            padding: 50px 0;
+            margin-top: 60px;
+            width: 100%;
+        }
+
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+
+        .footer-col {
+            flex: 1;
+            min-width: 240px;
+        }
+
+        .footer-logo {
+            color: var(--primary-color);
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .footer-contact-list p {
+            color: #cccccc;
+            font-size: 16px;
+            line-height: 1.8;
+            margin-bottom: 6px;
+        }
+
+        .footer-contact-list strong {
+            color: #ffffff;
+            font-weight: 500;
+        }
+
+        .footer-desc {
+            color: #cccccc;
+            font-size: 15px;
+            line-height: 1.7;
+        }
+
+        .footer-title {
+            color: #ffffff;
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 18px;
+        }
+
+        .footer-menu {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-menu li {
+            margin-bottom: 10px;
+        }
+
+        .footer-menu a {
+            color: #e67e22;
+            text-decoration: none;
+            font-size: 16px;
+            transition: color 0.2s ease;
+        }
+
+        .footer-menu a:hover {
+            color: #ff9f43;
+            text-decoration: underline;
+        }
+
+        .admin-btn {
+            display: inline-block;
+            background-color: #2c3e50;
+            color: #ffffff;
+            padding: 10px 24px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            margin-top: 12px;
+            border: 1px solid #455a64;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .admin-btn:hover {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            color: #ffffff;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                gap: 15px;
+                padding: 15px 20px;
+            }
+            .page-title {
+                font-size: 28px;
+            }
+            .about-text {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top Navbar -->
+    <header class="navbar">
+        <div class="logo">อินทิรา 789</div>
+        <nav class="nav-links">
+            <a href="index.html">หน้าแรก</a>
+            <a href="about.html" class="active">เกี่ยวกับเรา</a>
+            <a href="idea.html">สไตล์และไอเดีย</a>
+            <a href="example.html">ตัวอย่างงาน</a>
+            <a href="contact.html">ติดต่อ</a>
+        </nav>
+    </header>
+
+    <!-- Main Section -->
+    <main class="container">
+        <h1 class="page-title">เกี่ยวกับเรา</h1>
+        
+        <!-- ข้อความแจ้งสถานะการโหลด -->
+        <div id="loadingText" class="status-text">กำลังเชื่อมต่อฐานข้อมูลและดึงข้อมูลล่าสุด...</div>
+        
+        <!-- ส่วนแสดงเนื้อหา (จะถูกซ่อนไว้จนกว่าจะโหลดข้อมูลสำเร็จ) -->
+        <div id="aboutContent" style="display: none;">
+            <div class="about-text" id="contentText"></div>
+            
+            <div class="image-container" id="imageWrapper">
+                <img id="aboutImage" src="" alt="รูปภาพเกี่ยวกับเรา">
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer ด้านล่างสุด -->
+    <footer class="custom-footer">
+        <div class="footer-container">
+            <!-- คอลัมน์ที่ 1: โลโก้ และข้อมูลจากตาราง contact (tell, email, fecebook) -->
+            <div class="footer-col">
+                <div class="footer-logo">อินทิรา 789</div>
+                <div class="footer-contact-list">
+                    <p><strong>tell :</strong> <span id="footerTell">-</span></p>
+                    <p><strong>email :</strong> <span id="footerEmail">-</span></p>
+                    <p><strong>fecebook :</strong> <span id="footerFacebook">-</span></p>
+                </div>
+            </div>
+
+            <!-- คอลัมน์ที่ 2: เมนูเรียงลงล่าง -->
+            <div class="footer-col">
+                <h3 class="footer-title">เมนู</h3>
+                <ul class="footer-menu">
+                    <li><a href="index.html">หน้าแรก</a></li>
+                    <li><a href="about.html">เกี่ยวกับเรา</a></li>
+                    <li><a href="idea.html">สไตล์และไอเดีย</a></li>
+                    <li><a href="example.html">ตัวอย่างงาน</a></li>
+                    <li><a href="contact.html">ติดต่อ</a></li>
+                </ul>
+            </div>
+
+            <!-- คอลัมน์ที่ 3: ปุ่มสำหรับ Admin ทางขวา -->
+            <div class="footer-col">
+                <h3 class="footer-title">สำหรับผู้ดูแลระบบ</h3>
+                <p class="footer-desc">จัดการข้อมูลเว็บไซต์และระบบหลังบ้าน</p>
+                <a href="admin-login.html" class="admin-btn">สำหรับ Admin</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const API_URL = 'http://localhost:3000/api/about/all'; 
+        const CONTACT_API_URL = 'http://localhost:3000/api/contact/all';
+
+        function convertDriveUrl(url) {
+            if (!url) return '';
+            if (!url.includes('drive.google.com')) return url;
+
+            const match = url.match(/\/d\/([a-zA-Z0-9_-]+)/) || url.match(/id=([a-zA-Z0-9_-]+)/);
+            if (match && match[1]) {
+                return `https://drive.google.com/thumbnail?id=${match[1]}&sz=w1000`;
+            }
+            return url;
+        }
+
+        async function fetchAboutData() {
+            const loadingText = document.getElementById('loadingText');
+            
+            try {
+                const response = await fetch(API_URL);
+                const result = await response.json();
+
+                if (result.success && result.data && result.data.length > 0) {
+                    const latestData = result.data[result.data.length - 1]; 
+
+                    const textElement = document.getElementById('contentText');
+                    const imgElement = document.getElementById('aboutImage');
+                    const imageWrapper = document.getElementById('imageWrapper');
+                    const aboutContent = document.getElementById('aboutContent');
+
+                    textElement.innerText = latestData.text_A || 'ไม่มีรายละเอียด';
+
+                    const imageUrl = convertDriveUrl(latestData.image_A);
+                    if (imageUrl) {
+                        imgElement.src = imageUrl;
+                        imageWrapper.style.display = 'block'; 
+                    } else {
+                        imageWrapper.style.display = 'none'; 
+                    }
+
+                    loadingText.style.display = 'none';
+                    aboutContent.style.display = 'block';
+
+                } else {
+                    loadingText.innerText = 'ไม่พบข้อมูลในระบบ';
+                    loadingText.classList.add('error-text');
+                }
+            } catch (error) {
+                console.error('Error fetching about data:', error);
+                loadingText.innerText = 'ไม่สามารถเชื่อมต่อกับเซิร์ฟเวอร์ได้ โปรดตรวจสอบ Backend';
+                loadingText.classList.add('error-text');
+            }
+        }
+
+        async function fetchFooterContact() {
+            try {
+                const response = await fetch(CONTACT_API_URL);
+                const result = await response.json();
+
+                let contactData = null;
+                if (result.success && result.data) {
+                    contactData = Array.isArray(result.data) 
+                        ? result.data[result.data.length - 1] 
+                        : result.data;
+                } else if (Array.isArray(result) && result.length > 0) {
+                    contactData = result[result.length - 1];
+                }
+
+                if (contactData) {
+                    const rawTell = contactData.tell;
+                    const formattedTell = (rawTell !== null && rawTell !== undefined && rawTell !== '')
+                        ? String(rawTell).padStart(10, '0')
+                        : '-';
+
+                    document.getElementById('footerTell').textContent = formattedTell;
+                    document.getElementById('footerEmail').textContent = contactData.email || '-';
+                    document.getElementById('footerFacebook').textContent = contactData.fecebook || contactData.facebook || '-';
+                }
+            } catch (error) {
+                console.error('Error fetching footer contact data:', error);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            fetchAboutData();
+            fetchFooterContact();
+        });
+    </script>
+</body>
+</html>
